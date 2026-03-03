@@ -1,3 +1,6 @@
+from game_art import Game_art, display_weapons_shop_art, display_Welcome_art, display_entrance_art, \
+    display_armor_shop_art, display_main_gate_art
+
 def which_direction(choices):
 
     while True:
@@ -32,10 +35,15 @@ def player_action(directions, objects):
   return verb, noun
 
 def welcome():
+    display_Welcome_art()
+
     player = input("What's your name adventurer?")
     print("Welcome to Evernight,", player)
 
+
+
 def entrance():
+    display_entrance_art()
     print()
     print("you stand before the town square")
     print("to the east is a weapons shop")
@@ -54,6 +62,7 @@ def entrance():
         main_gate()
 
 def weapons_shop():
+    display_weapons_shop_art()
     print()
     print("you look and see a sword, spear, mace. and trident")
     print("which do you pick")
@@ -75,7 +84,9 @@ def weapons_shop():
         entrance()
 
 
+
 def armor_shop():
+    display_armor_shop_art()
     print()
     print("you look and see leather, chainmail, plate, wooden shield, steel shield,")
     print("which do you pick")
@@ -98,6 +109,7 @@ def armor_shop():
         entrance()
 
 def main_gate():
+    display_main_gate_art()
     print()
     print("you stand at the main gate")
     print("to the east a path leads to the mountain")
