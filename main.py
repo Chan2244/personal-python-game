@@ -1,6 +1,3 @@
-from _thread import lock
-
-
 def which_direction(choices):
 
     while True:
@@ -45,43 +42,32 @@ def entrance():
     print("to the west is a armor shop")
     print("the main gate is to the south")
 
-    go = which_direction(['e', 'w', 's'])
+    go = which_direction(['w', 'a', 'g'])
 
-    if go == "e":
+    if go == "w":
         weapons_shop()
 
-    if go == 'w':
+    if go == 'a':
         armor_shop()
 
-    if go == 's':
+    if go == 'g':
         main_gate()
 
 def weapons_shop():
     print()
-    print("you look and see a sword, spear, mace.")
+    print("you look and see a sword, spear, mace. and trident")
     print("which do you pick")
     print("to exit shop go west")
 
-    (verb, noun) = player_action (['s'], ['sword', 'mace', 'spear'])
+    items = ['sword', 'spear', 'mace', 'axe', 'trident']
+    (verb, noun) = player_action(['e'], items)
     if verb == "go":
-        if noun == 'w':
+        if noun == 'e':
             entrance()
 
     if verb == "take":
-        if noun == "sword":
-            print("you have chosen to take the sword")
-
-    if verb == "take":
-        if noun == "mace":
-            print("you have chosen to take the mace")
-
-    if verb == "take":
-        if noun == "spear":
-            print("you have chosen to take take the spear")
-
-    if verb == "exit":
-         if noun == "exit choice":
-            print("you exit the weapon selection")
+        if noun in items:
+            print(f"you have chosen to take the {noun} ")
 
     go = which_direction(['w'])
 
@@ -95,34 +81,16 @@ def armor_shop():
     print("which do you pick")
     print("to exit shop go east")
 
-    (verb, noun) = player_action(['e'], ['leather', 'chainmail', 'plate', 'wooden_shield', 'steel_shield'])
+    items = ['leather', 'chainmail', 'plate', 'wooden_shield', 'steel_shield']
+    (verb, noun) = player_action(['e'], items)
     if verb == "go":
         if noun == 'e':
             entrance()
 
     if verb == "take":
-        if noun == "leather":
-            print("you have chosen to take the leather armor")
+        if noun in items:
+            print(f"you have chosen to take the {noun} armor")
 
-    if verb == "take":
-        if noun == "chainmail":
-            print("you have chosen to take the chainmail armor")
-
-    if verb == "take":
-        if noun == "plate":
-            print("you have chosen to take the plate armor")
-
-    if verb == "take":
-         if noun == "wooden_shield":
-            print("you have chosen to take take the wooden shield")
-
-    if verb == "take":
-        if noun == "steel_shield":
-            print("you have chosen to take the steel shield")
-
-    if verb == "exit":
-        if noun == "exit choice":
-            print("you exit the weapon selection")
 
     go = which_direction(['e'])
 
@@ -136,12 +104,12 @@ def main_gate():
     print("to the west leads to the forest")
     print("to the south leads you into a swamp")
 
-    go = which_direction(['e', 'w', 's'])
+    go = which_direction(['m', 'f', 's'])
 
-    if go == 'e':
+    if go == 'm':
         mountain()
 
-    if go == 'w':
+    if go == 'f':
         forest()
 
     if go == 's':
@@ -153,12 +121,12 @@ def mountain():
     print(" to the north is a cave, to the south is a open well worn path")
     print("what do you want to do?")
 
-    go = which_direction(['n', 's'])
+    go = which_direction(['c', 'w'])
 
-    if go == 'n':
+    if go == 'c':
         cave()
 
-    if go == 's':
+    if go == 'w':
         worn_path()
 
 def cave():
@@ -167,18 +135,18 @@ def cave():
     print("you see a wolf")
     print("what do you do")
 
-    (noun, verb) = player_action (['n'], ['spear, sword, mace'])
+    (verb, noun) = player_action (['n'])
 
     if verb == "attack":
         if noun == "wolf":
             print("you kill the wolf. which way do you want to go.")
             print(" 'n' goes into the cave.  's' goes back to the mountain.")
 
-    go = which_direction(['n', 's'])
-    if go == 'n':
+    go = which_direction(['i', 'm'])
+    if go == 'i':
         into_cave()
 
-    if go == 's':
+    if go == 'm':
         mountain()
 
 def into_cave():
@@ -187,12 +155,12 @@ def into_cave():
     print("to the 'e' tunel goes to the left, the 'w' goes to the right ")
     print("which way do you want to go")
 
-    go = which_direction(['e', 'w'])
+    go = which_direction(['l', 'r'])
 
-    if go == 'e':
+    if go == 'l':
         open_cavern()
 
-    if go == 'w':
+    if go == 'r':
         dead_end()
 
 def open_cavern():
@@ -201,15 +169,15 @@ def open_cavern():
     print("first path goes to the 'e', second path goes 'n', and the tird goes 'w'")
     print("which way do you want to go")
 
-    go = which_direction(['e', 'w', 'n'])
+    go = which_direction(['f', 's', 't'])
 
-    if go == 'e':
+    if go == 'f':
         open_cavern()
 
-    if go == 'n':
+    if go == 's':
         ladder_room()
 
-    if go == 'w':
+    if go == 't':
         vault_room()
 
 def dead_end():
@@ -217,23 +185,15 @@ def dead_end():
     print("you find two keys and an open chest")
     print("what do you want to do?")
 
-    (noun, verb) = player_action (['e'], ['key1', 'key2', 'chest' ])
+    items = ['key1', 'key2', 'chest',]
+    (verb, noun) = player_action(['e'], items)
+    if verb == "go":
+        if noun == 'e':
+            entrance()
 
     if verb == "take":
-        if noun == "key1":
-            print("you have found the vault key")
-
-    if verb == "take":
-        if noun == "key2":
-            print("you have found the trap_door key")
-
-    if verb == "look":
-        if noun == "chest":
-            print("you find an axe")
-
-    if verb == "take":
-        if noun == "axe":
-            print("you take the axe")
+        if noun in items:
+            print(f"you have chosen to take the {noun} ")
 
     go = which_direction(['e',])
 
@@ -245,7 +205,7 @@ def ladder_room():
     print("you look up and see a lock on a trap door")
     print("do you want to unlock the door")
 
-    (noun, verb) = player_action (['u'], ['lock'])
+    (verb, noun) = player_action (['u'], ['lock'])
 
     if verb == "unlock with key2":
         if noun == "lock":
@@ -260,7 +220,7 @@ def vault_room():
     print("you find the vault")
     print("do you want to unlock the door")
 
-    (noun, verb) = player_action (['n'], ['lock'])
+    (verb, noun) = player_action (['n'], ['lock'])
 
     if verb == "unlock with key1":
         if noun == "lock":
@@ -274,12 +234,12 @@ def dungeon():
     print("infont of you is a stair case leading up to the main level")
     print("do you go back or go forward")
 
-    go = which_direction(['s', 'n'])
+    go = which_direction(['b', 'f'])
 
-    if go == 's':
+    if go == 'b':
         ladder_room()
 
-    if go == 'n':
+    if go == 'f':
         main_level()
 
 def main_level():
@@ -287,7 +247,7 @@ def main_level():
     print("you are spotted by the litch king")
     print("do you wish to attack the litch king")
 
-    (noun, verb) = player_action ()
+    (verb, noun) = player_action (['attack'])
 
     if verb == "attack":
         if noun == "litch king":
@@ -305,24 +265,24 @@ def forest():
     print("to the south is a small_pond, to the east is a denser_thicket, to the north is an old_fort")
     print("what do you want to do?")
 
-    go = which_direction(['s', 'e', 'n'])
-
-    if go == 'n':
-        old_fort()
-
-    if go == 'e':
-        denser_thicket()
+    go = which_direction(['s', 'd', 'o'])
 
     if go == 's':
+        old_fort()
+
+    if go == 'd':
+        denser_thicket()
+
+    if go == 'o':
         small_pond()
 
 def small_pond():
     print()
     print("you stand at the edge of the small pond")
     print("you find a key")
-    print("what do you want to do?")
 
-    (noun, verb) = player_action (['n', 'e'] ['key'])
+
+    (verb, noun) = player_action (['n', 'e'], ['key'])
 
     if verb == 'take':
         if noun == 'key':
@@ -338,7 +298,7 @@ def denser_thicket():
     print("you enter the thicket")
     print("a goblin attacks")
 
-    (noun, verb) = player_action (['n', 'e'] ['spear', 'sword', 'mace'])
+    (verb, noun) = player_action (['n', 'e'],  ['spear', 'sword', 'mace'])
 
     if verb == "attack":
         if noun == "Goblin":
@@ -346,21 +306,22 @@ def denser_thicket():
             print("which way do you want to go" )
             print("to the east is back to forest, to the north is the old fort, and to the west is a clearing.")
 
-    go = which_direction(['n', 'e', 'w'])
+    go = which_direction(['f', 'o', 'c'])
 
-    if go ==  'n':
+    if go ==  'f':
         old_fort()
 
-    if go == 'e':
+    if go == 'o':
         forest()
 
-    if go == 'w':
+    if go == 'c':
         clearing()
 
 def clearing():
     print()
     print("you find yourself in a clearing. a spike pit opens up under you")
     print("you fell onto the spikes. Game Over!")
+
 
 def old_fort():
     print()
@@ -369,21 +330,21 @@ def old_fort():
     print("to the east is a small gap between the stones")
     print("do you clime the gap or go to the door")
 
-    go = which_direction( ['w', 'e'])
+    go = which_direction( ['s', 'g'])
 
-    if go == 'w':
+    if go == 's':
         side_gate()
 
-    if go == 'e':
+    if go == 'g':
         stone_gap()
 
 def stone_gap():
     print()
     print("would you like to try to climb the stone or go back")
 
-    go = which_direction(['w', 'n'])
+    go = which_direction(['y', 'n'])
 
-    if go == 'w':
+    if go == 'y':
         old_fort()
 
     if go == 'n':
@@ -396,7 +357,7 @@ def side_gate():
     print("the side gate is locked")
     print(" do you unlock the door or go back to the front gate")
 
-    (noun, verb) = player_action (['e', 'n'] ['key'])
+    (verb, noun) = player_action (['e', 'n'], ['key'])
 
     if verb == "unlock":
         if noun == "key":
@@ -418,7 +379,7 @@ def old_camp():
     print("you see the old chapel to the north")
     print("do you go in, or back out the gate?")
 
-    go = which_direction(['n','s'])
+    go = which_direction(['o','g'])
 
     if go == 's':
         side_gate()
@@ -432,7 +393,7 @@ def old_chapel():
     print("you find a ancient sword")
     print("do you take the sword")
 
-    (noun, verb) = player_action (['s'], ['ancient sword'])
+    (verb, noun) = player_action (['s'], ['ancient sword'])
 
     if verb == 'take':
         if noun == 'ancient sword':
@@ -449,7 +410,6 @@ def swamp():
     print("you stand at the edge of the swamp")
     print("you fall in to the quicksand.")
     print("Game Over!")
-
 
 
 welcome()
@@ -475,3 +435,6 @@ old_camp()
 stone_gap()
 clearing()
 swamp()
+
+from game_art import Game_art
+print(Game_art)
