@@ -1,5 +1,11 @@
-from game_art import Game_art, display_weapons_shop_art, display_Welcome_art, display_entrance_art, \
-    display_armor_shop_art, display_main_gate_art
+from game_art import (display_weapons_shop_art, display_welcome_art, display_entrance_art, \
+    display_armor_shop_art, display_main_gate_art, display_mountain_art, display_cave_art, \
+    display_into_cave_art, display_open_cavern_art, display_dead_end_art, display_ladder_room_art,\
+    display_vault_room_art, display_dungeon_art, display_main_level_art, display_worn_path_art, display_forest_art,\
+    display_small_pond_art, display_denser_thicket_art, display_clearing_art, display_old_fort_art, display_stone_gap_art,\
+    display_side_gate_art, display_old_camp_art, display_old_chapel_art, display_swamp_art)
+
+from end_game import display_end_game_function
 
 def which_direction(choices):
 
@@ -15,6 +21,7 @@ def which_direction(choices):
 
 def player_action(directions, objects):
 
+  global verb, noun
   while True:
     c = input("What do you want to do? ")
     try:
@@ -35,7 +42,7 @@ def player_action(directions, objects):
   return verb, noun
 
 def welcome():
-    display_Welcome_art()
+    display_welcome_art()
 
     player = input("What's your name adventurer?")
     print("Welcome to Evernight,", player)
@@ -128,6 +135,7 @@ def main_gate():
         swamp()
 
 def mountain():
+    display_mountain_art()
     print()
     print("you stand at the base of the mountain")
     print(" to the north is a cave, to the south is a open well worn path")
@@ -142,6 +150,7 @@ def mountain():
         worn_path()
 
 def cave():
+    display_cave_art()
     print()
     print("your at the entrance of the cave")
     print("you see a wolf")
@@ -162,6 +171,7 @@ def cave():
         mountain()
 
 def into_cave():
+    display_into_cave_art()
     print()
     print("you go deeper into the cave and see two tunnels")
     print("to the 'e' tunel goes to the left, the 'w' goes to the right ")
@@ -176,6 +186,7 @@ def into_cave():
         dead_end()
 
 def open_cavern():
+    display_open_cavern_art()
     print()
     print("You see an open cavern with three paths")
     print("first path goes to the 'e', second path goes 'n', and the tird goes 'w'")
@@ -193,6 +204,7 @@ def open_cavern():
         vault_room()
 
 def dead_end():
+    display_dead_end_art()
     print()
     print("you find two keys and an open chest")
     print("what do you want to do?")
@@ -213,6 +225,7 @@ def dead_end():
         into_cave()
 
 def ladder_room():
+    display_ladder_room_art()
     print()
     print("you look up and see a lock on a trap door")
     print("do you want to unlock the door")
@@ -227,7 +240,9 @@ def ladder_room():
     if go == 'u':
         dungeon()
 
-def vault_room():
+def vault_room(current_room=None):
+    display_vault_room_art()
+    display_end_game_function(current_room = current_room)
     print()
     print("you find the vault")
     print("do you want to unlock the door")
@@ -241,9 +256,10 @@ def vault_room():
             print(" the ooz slices you . Game Over!")
 
 def dungeon():
+    display_dungeon_art()
     print()
     print("you see old cells empty")
-    print("infont of you is a stair case leading up to the main level")
+    print("in font of you is a stair case leading up to the main level")
     print("do you go back or go forward")
 
     go = which_direction(['b', 'f'])
@@ -255,23 +271,27 @@ def dungeon():
         main_level()
 
 def main_level():
+    display_main_level_art()
     print()
     print("you are spotted by the litch king")
     print("do you wish to attack the litch king")
 
-    (verb, noun) = player_action (['attack'])
+    (verb, noun) = player_action (['attack'], ['litch king'])
 
     if verb == "attack":
         if noun == "litch king":
             print("you have slain the litch king. YOU WIN!!!!")
 
-def worn_path():
+def worn_path(current_room = None):
+    display_worn_path_art(current_room = current_room)
+    display_end_game_function()
     print()
     print("you are at the worn path")
     print(" a bolder falls onto you")
     print("game over")
 
 def forest():
+    display_forest_art()
     print()
     print("you stand at the entrance of the forest")
     print("to the south is a small_pond, to the east is a denser_thicket, to the north is an old_fort")
@@ -279,16 +299,17 @@ def forest():
 
     go = which_direction(['s', 'd', 'o'])
 
-    if go == 's':
+    if go == 'o':
         old_fort()
 
     if go == 'd':
         denser_thicket()
 
-    if go == 'o':
+    if go == 's':
         small_pond()
 
 def small_pond():
+    display_small_pond_art()
     print()
     print("you stand at the edge of the small pond")
     print("you find a key")
@@ -306,11 +327,12 @@ def small_pond():
         forest()
 
 def denser_thicket():
+    display_denser_thicket_art()
     print()
     print("you enter the thicket")
     print("a goblin attacks")
 
-    (verb, noun) = player_action (['n', 'e'],  ['spear', 'sword', 'mace'])
+    (verb, noun) = player_action (['n', 'e'],  ['Goblin'])
 
     if verb == "attack":
         if noun == "Goblin":
@@ -320,22 +342,25 @@ def denser_thicket():
 
     go = which_direction(['f', 'o', 'c'])
 
-    if go ==  'f':
+    if go ==  'o':
         old_fort()
 
-    if go == 'o':
+    if go == 'f':
         forest()
 
     if go == 'c':
         clearing()
 
-def clearing():
+def clearing(current_room = None):
+    display_clearing_art()
+    display_end_game_function(current_room = current_room)
     print()
     print("you find yourself in a clearing. a spike pit opens up under you")
     print("you fell onto the spikes. Game Over!")
 
 
 def old_fort():
+    display_old_fort_art()
     print()
     print("your at the gate of the old fort")
     print("the gate is bared but to the west is the side gate")
@@ -350,7 +375,9 @@ def old_fort():
     if go == 'g':
         stone_gap()
 
-def stone_gap():
+def stone_gap(current_room = None):
+    display_end_game_function(current_room = current_room)
+    display_stone_gap_art()
     print()
     print("would you like to try to climb the stone or go back")
 
@@ -365,14 +392,15 @@ def stone_gap():
 
 
 def side_gate():
+    display_side_gate_art()
     print()
     print("the side gate is locked")
     print(" do you unlock the door or go back to the front gate")
 
-    (verb, noun) = player_action (['e', 'n'], ['key'])
+    (verb, noun) = player_action (['e', 'n'], ['gate'])
 
     if verb == "unlock":
-        if noun == "key":
+        if noun == "gate":
             print("you unlock the side gate.")
             print("you enter the courtyard and see the remains of an old camp")
 
@@ -386,6 +414,7 @@ def side_gate():
         old_camp()
 
 def old_camp():
+    display_old_camp_art()
     print()
     print("the old camp is abandoned.")
     print("you see the old chapel to the north")
@@ -400,6 +429,7 @@ def old_camp():
         old_chapel()
 
 def old_chapel():
+    display_old_chapel_art()
     print()
     print("the chapel doors creek open")
     print("you find a ancient sword")
@@ -417,7 +447,9 @@ def old_chapel():
         old_camp()
 
 
-def swamp():
+def swamp(current_room = None):
+    display_swamp_art()
+    display_end_game_function( current_room = current_room)
     print()
     print("you stand at the edge of the swamp")
     print("you fall in to the quicksand.")
@@ -447,6 +479,5 @@ old_camp()
 stone_gap()
 clearing()
 swamp()
+old_chapel()
 
-from game_art import Game_art
-print(Game_art)
