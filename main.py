@@ -34,8 +34,11 @@ def player_action(directions, objects):
     elif verb == "take":
       if noun in objects: break
       else: print("There is no", noun, "to take")
+    elif verb == "unlock":
+        if noun in objects: break
+        else: print("You can't unlock", noun)
     else:
-      print("I only understand two commands: go, take")
+        print("I only understand two commands: go, take")
 
   return verb, noun
 
