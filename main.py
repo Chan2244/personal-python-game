@@ -5,8 +5,6 @@ from game_art import (display_weapons_shop_art, display_welcome_art, display_ent
     display_small_pond_art, display_denser_thicket_art, display_clearing_art, display_old_fort_art, display_stone_gap_art,\
     display_side_gate_art, display_old_camp_art, display_old_chapel_art, display_swamp_art)
 
-from end_game import display_end_game_function
-
 def which_direction(choices):
 
     while True:
@@ -153,15 +151,7 @@ def cave():
     display_cave_art()
     print()
     print("your at the entrance of the cave")
-    print("you see a wolf")
     print("what do you do")
-
-    (verb, noun) = player_action (['n'])
-
-    if verb == "attack":
-        if noun == "wolf":
-            print("you kill the wolf. which way do you want to go.")
-            print(" 'n' goes into the cave.  's' goes back to the mountain.")
 
     go = which_direction(['i', 'm'])
     if go == 'i':
@@ -211,9 +201,6 @@ def dead_end():
 
     items = ['key1', 'key2', 'chest',]
     (verb, noun) = player_action(['e'], items)
-    if verb == "go":
-        if noun == 'e':
-            entrance()
 
     if verb == "take":
         if noun in items:
@@ -230,9 +217,9 @@ def ladder_room():
     print("you look up and see a lock on a trap door")
     print("do you want to unlock the door")
 
-    (verb, noun) = player_action (['u'], ['lock'])
+    (verb, noun) = player_action (['unlock'], ['lock'])
 
-    if verb == "unlock with key2":
+    if verb == "unlock":
         if noun == "lock":
             print("you have unlocked the trap door")
     go = which_direction(['u'])
@@ -240,16 +227,15 @@ def ladder_room():
     if go == 'u':
         dungeon()
 
-def vault_room(current_room=None):
+def vault_room():
     display_vault_room_art()
-    display_end_game_function(current_room = current_room)
     print()
     print("you find the vault")
     print("do you want to unlock the door")
 
-    (verb, noun) = player_action (['n'], ['lock'])
+    (verb, noun) = player_action (['unlock'], ['lock'])
 
-    if verb == "unlock with key1":
+    if verb == "unlock":
         if noun == "lock":
             print("you unlock the vault")
             print("you freed the death trap ooz")
@@ -273,18 +259,18 @@ def dungeon():
 def main_level():
     display_main_level_art()
     print()
-    print("you are spotted by the litch king")
-    print("do you wish to attack the litch king")
+    print("you find the crown of leadership")
+    print("do you take the crown")
 
-    (verb, noun) = player_action (['attack'], ['litch king'])
+    (verb, noun) = player_action (['take'], ['crown'])
+    if verb == "take":
+        if noun == "crown":
+            print("you take the crown")
+            print("you are now the king")
+            print("you win")
 
-    if verb == "attack":
-        if noun == "litch king":
-            print("you have slain the litch king. YOU WIN!!!!")
-
-def worn_path(current_room = None):
-    display_worn_path_art(current_room = current_room)
-    display_end_game_function()
+def worn_path():
+    display_worn_path_art()
     print()
     print("you are at the worn path")
     print(" a bolder falls onto you")
@@ -330,15 +316,8 @@ def denser_thicket():
     display_denser_thicket_art()
     print()
     print("you enter the thicket")
-    print("a goblin attacks")
-
-    (verb, noun) = player_action (['n', 'e'],  ['Goblin'])
-
-    if verb == "attack":
-        if noun == "Goblin":
-            print("you kill the goblin")
-            print("which way do you want to go" )
-            print("to the east is back to forest, to the north is the old fort, and to the west is a clearing.")
+    print("you see the clearing, the old fort, and the forest")
+    print("which way do you want to go?")
 
     go = which_direction(['f', 'o', 'c'])
 
@@ -351,9 +330,8 @@ def denser_thicket():
     if go == 'c':
         clearing()
 
-def clearing(current_room = None):
+def clearing():
     display_clearing_art()
-    display_end_game_function(current_room = current_room)
     print()
     print("you find yourself in a clearing. a spike pit opens up under you")
     print("you fell onto the spikes. Game Over!")
@@ -375,8 +353,7 @@ def old_fort():
     if go == 'g':
         stone_gap()
 
-def stone_gap(current_room = None):
-    display_end_game_function(current_room = current_room)
+def stone_gap():
     display_stone_gap_art()
     print()
     print("would you like to try to climb the stone or go back")
@@ -397,7 +374,7 @@ def side_gate():
     print("the side gate is locked")
     print(" do you unlock the door or go back to the front gate")
 
-    (verb, noun) = player_action (['e', 'n'], ['gate'])
+    (verb, noun) = player_action (['unlock'], ['gate'])
 
     if verb == "unlock":
         if noun == "gate":
@@ -447,9 +424,8 @@ def old_chapel():
         old_camp()
 
 
-def swamp(current_room = None):
+def swamp():
     display_swamp_art()
-    display_end_game_function( current_room = current_room)
     print()
     print("you stand at the edge of the swamp")
     print("you fall in to the quicksand.")
@@ -480,4 +456,3 @@ stone_gap()
 clearing()
 swamp()
 old_chapel()
-
