@@ -1,82 +1,3 @@
-from game_art import (display_weapons_shop_art, display_welcome_art, display_entrance_art, \
-    display_armor_shop_art, display_main_gate_art, display_mountain_art, display_cave_art, \
-    display_into_cave_art, display_open_cavern_art, display_dead_end_art, display_ladder_room_art,\
-    display_vault_room_art, display_dungeon_art, display_main_level_art, display_worn_path_art, display_forest_art,\
-    display_small_pond_art, display_denser_thicket_art, display_clearing_art, display_old_fort_art, display_stone_gap_art,\
-    display_side_gate_art, display_old_camp_art, display_old_chapel_art, display_swamp_art)
-
-from end_game import (display_end_game_function,)
-
-from end_game import (victory_function)
-
-
-def which_direction(choices):
-
-    while True:
-        c = ",".join(choices)
-        go = input("Which way do you want to go: " + c +"? ")
-        if go == "": continue
-        go = go[0].lower()
-        if go in choices:
-            return go
-        else:
-            print("I don't understand")
-
-def player_action(directions, objects):
-
-  global verb, noun
-  while True:
-    c = input("What do you want to do? ")
-    try:
-      (verb, noun) = c.lower().split(" ")
-    except ValueError:
-      print("I don't understand")
-      continue
-
-    if verb == "go":
-      if noun[0] in directions: break
-      else: print("You can't go in direction", noun)
-    elif verb == "take":
-      if noun in objects: break
-      else: print("There is no", noun, "to take")
-    elif verb == "unlock":
-        if noun in objects: break
-        else: print("You can't unlock", noun)
-    elif verb == "attack":
-        if noun in objects: break
-        else: print("you have killed", noun)
-    else:
-        print("I only understand two commands: go, take")
-
-  return verb, noun
-
-def welcome():
-    display_welcome_art()
-
-    player = input("What's your name adventurer?")
-    print("Welcome to Evernight,", player)
-
-
-
-def entrance():
-    display_entrance_art()
-    print()
-    print("you stand before the town square")
-    print("to the east is a weapons shop")
-    print("to the west is a armor shop")
-    print("the main gate is to the south")
-
-    go = which_direction(['w', 'a', 'g'])
-
-    if go == "w":
-        weapons_shop()
-
-    if go == 'a':
-        armor_shop()
-
-    if go == 'g':
-        main_gate()
-
 def weapons_shop():
     display_weapons_shop_art()
     print()
@@ -256,7 +177,7 @@ def vault_room():
     if verb == "unlock":
         if noun == "lock":
             print("you are attacked by a trap")
-    display_end_game_function(vault_room)
+    display_end_game_function('vault_room')
 
 def dungeon():
     display_dungeon_art()
@@ -381,8 +302,15 @@ def old_fort():
 def stone_gap():
     display_stone_gap_art()
     print()
-    print("you come upon a lose stone for climbing")
-    print("you trie to climb the stone")
+    print("would you like to try to climb the stone or go back")
+
+    go = which_direction(['y', 'n'])
+
+    if go == 'y':
+        old_fort()
+
+    if go == 'n':
+        stone_gap()
     display_end_game_function('stone_gap')
 
 
@@ -450,6 +378,26 @@ def swamp():
     display_end_game_function('swamp')
 
 
-welcome()
-entrance()
 
+weapons_shop()
+armor_shop()
+main_gate()
+mountain()
+cave()
+into_cave()
+open_cavern()
+ladder_room()
+dungeon()
+vault_room()
+dead_end()
+worn_path()
+forest()
+small_pond()
+denser_thicket()
+old_fort()
+side_gate()
+old_camp()
+stone_gap()
+clearing()
+swamp()
+old_chapel()
