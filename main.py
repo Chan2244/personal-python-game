@@ -1,4 +1,4 @@
-from game_art import (display_weapons_shop_art, display_welcome_art, display_entrance_art, \
+from gameart import (display_weapons_shop_art, display_welcome_art, display_entrance_art, \
     display_armor_shop_art, display_main_gate_art, display_mountain_art, display_cave_art, \
     display_into_cave_art, display_open_cavern_art, display_dead_end_art, display_ladder_room_art,\
     display_vault_room_art, display_dungeon_art, display_main_level_art, display_worn_path_art, display_forest_art,\
